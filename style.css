@@ -1,0 +1,95 @@
+/* --- CONFIGURATION GÉNÉRALE --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- CLASSEMENT (STANDINGS) --- */
+.qualified-row { 
+    border-left: 4px solid #22c55e; 
+    background: rgba(34, 197, 94, 0.05); 
+    margin-bottom: 4px;
+}
+
+.eliminated-row { 
+    border-left: 4px solid #ef4444; 
+    background: rgba(239, 68, 68, 0.05); 
+    margin-bottom: 4px;
+}
+
+/* --- MATCHS DE SAISON RÉGULIÈRE --- */
+.predict-btn {
+    transition: all 0.2s ease;
+}
+
+/* --- ARBRE DES PLAYOFFS --- */
+.bracket-title {
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.match-card {
+    background: #1e293b;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 200px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    border: 1px solid #334155;
+    transition: transform 0.2s ease;
+}
+
+.match-card:hover {
+    transform: translateY(-2px);
+    border-color: #475569;
+}
+
+.match-team {
+    padding: 12px 15px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-bottom: 1px solid #334155;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.match-team:last-child { 
+    border-bottom: none; 
+}
+
+/* Effet au survol pour montrer que c'est cliquable */
+.match-team:hover:not(.bg-blue-600) {
+    background-color: rgba(30, 41, 59, 0.8);
+    padding-left: 20px;
+    color: #60a5fa;
+}
+
+/* --- GRANDE FINALE --- */
+.final-slot {
+    padding: 3rem 2rem;
+    border: 4px double #eab308;
+    background: radial-gradient(circle at center, rgba(234, 179, 8, 0.15) 0%, transparent 100%);
+    border-radius: 2rem;
+    text-align: center;
+    min-width: 250px;
+    box-shadow: 0 0 30px rgba(234, 179, 8, 0.1);
+}
+
+/* Animation pour le gagnant sélectionné */
+.bg-blue-600 {
+    background-color: #2563eb !important;
+    color: white !important;
+}
+
+input[type=number]::-webkit-inner-spin-button { opacity: 0; }
+input:focus { color: #60a5fa; }
+.match-card { min-height: 82px; } /* Pour garder une taille fixe */
