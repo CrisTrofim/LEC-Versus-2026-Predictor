@@ -3,97 +3,98 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LEC 2026 Predictor</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8">
+<body class="bg-slate-900 text-slate-100 min-h-screen p-2 md:p-8">
 
-    <header class="text-center mb-10">
+    <header class="text-center mb-6 md:mb-10 pt-4">
         <h1
-            class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-2">
+            class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-2">
             LEC VERSUS 2026</h1>
-        <p class="text-slate-400 uppercase tracking-widest">Regular Season & Playoffs Simulator</p>
+        <p class="text-[10px] md:text-sm text-slate-400 uppercase tracking-widest px-4">Regular Season & Playoffs
+            Simulator</p>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-        <section class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-yellow-500">
-                <span class="w-2 h-6 bg-yellow-500 rounded"></span> Live Standings
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 mb-8">
+        <section class="bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-700 shadow-xl">
+            <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-yellow-500">
+                <span class="w-1.5 h-5 bg-yellow-500 rounded"></span> Standings
             </h2>
-            <div id="standings" class="space-y-2"></div>
+            <div id="standings" class="space-y-1.5"></div>
         </section>
 
-        <section class="lg:col-span-2 bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-blue-500">
-                <span class="w-2 h-6 bg-blue-500 rounded"></span> Week 4 Predictions
+        <section class="lg:col-span-2 bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-700 shadow-xl">
+            <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-blue-500">
+                <span class="w-1.5 h-5 bg-blue-500 rounded"></span> Week 4 Matches
             </h2>
-            <div id="matches-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            <div id="matches-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
         </section>
     </div>
 
-    <section class="bg-slate-800/40 p-8 rounded-3xl border border-slate-700 overflow-x-auto shadow-2xl">
-        <h2 class="text-3xl font-black text-center mb-12 italic tracking-tighter">PLAYOFF BRACKET</h2>
+    <section class="bg-slate-800/40 p-4 md:p-8 rounded-3xl border border-slate-700 shadow-2xl overflow-hidden">
+        <h2 class="text-2xl md:text-3xl font-black text-center mb-8 italic tracking-tighter">PLAYOFF BRACKET</h2>
 
-        <div class="flex gap-12 min-w-[1200px] justify-center mb-16">
-            <div class="flex flex-col gap-10">
-                <h3 class="bracket-title">Upper Round 1 (Bo3)</h3>
-                <div id="ub-r1" class="space-y-10"></div>
-            </div>
-
-            <div class="flex flex-col gap-10 justify-center">
-                <h3 class="bracket-title text-blue-400">Upper Semis (Bo3)</h3>
-                <div id="ub-r2" class="space-y-28"></div>
-            </div>
-
-            <div class="flex flex-col gap-10 justify-center">
-                <h3 class="bracket-title text-orange-400">Upper Final (Bo5)</h3>
-                <div id="ub-final"></div>
-            </div>
-
-            <div class="flex flex-col gap-10 justify-center items-center">
-                <h3 class="bracket-title text-yellow-500 underline decoration-2">Grand Final (Bo5)</h3>
-                <div id="grand-final-container" class="final-slot">
-                    <div id="grand-final"></div>
-                    <div class="mt-4 text-[10px] text-yellow-500 font-bold uppercase tracking-widest">Champion</div>
-                    <div id="winner-name" class="font-black text-2xl text-white italic">???</div>
+        <div class="overflow-x-auto pb-6 touch-pan-x">
+            <div class="inline-flex flex-col gap-12 min-w-max px-4">
+                <div class="flex gap-8 md:gap-12">
+                    <div class="flex flex-col gap-6">
+                        <h3 class="bracket-title">Upper R1 (Bo3)</h3>
+                        <div id="ub-r1" class="space-y-6"></div>
+                    </div>
+                    <div class="flex flex-col gap-6 justify-center">
+                        <h3 class="bracket-title text-blue-400">Semis</h3>
+                        <div id="ub-r2" class="space-y-24"></div>
+                    </div>
+                    <div class="flex flex-col gap-6 justify-center">
+                        <h3 class="bracket-title text-orange-400">U. Final</h3>
+                        <div id="ub-final"></div>
+                    </div>
+                    <div class="flex flex-col gap-6 justify-center items-center px-4">
+                        <div id="grand-final-container" class="final-slot">
+                            <h3 class="bracket-title text-yellow-500 mb-2">Grand Final</h3>
+                            <div id="grand-final"></div>
+                            <div class="mt-4 text-[10px] text-yellow-500 font-bold uppercase tracking-widest">Champion
+                            </div>
+                            <div id="winner-name" class="font-black text-xl md:text-2xl text-white italic">???</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="flex items-center gap-4 mb-12">
-            <div class="flex-1 h-px bg-slate-700"></div>
-            <span class="text-slate-500 text-xs font-bold uppercase tracking-widest">Lower Bracket (Elimination)</span>
-            <div class="flex-1 h-px bg-slate-700"></div>
-        </div>
+                <div class="flex items-center gap-4 py-4">
+                    <div class="flex-1 h-px bg-slate-700"></div>
+                    <span class="text-slate-500 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">Lower
+                        Bracket</span>
+                    <div class="flex-1 h-px bg-slate-700"></div>
+                </div>
 
-        <div class="flex gap-12 min-w-[1200px] justify-center pb-8">
-            <div class="flex flex-col gap-8">
-                <h3 class="bracket-title text-red-400">Lower Round 1 (Bo3)</h3>
-                <div id="lb-r1" class="space-y-8"></div>
-            </div>
-
-            <div class="flex flex-col gap-8">
-                <h3 class="bracket-title text-red-400">Lower Round 2 (Bo3)</h3>
-                <div id="lb-r2" class="space-y-8"></div>
-            </div>
-
-            <div class="flex flex-col gap-8 justify-center">
-                <h3 class="bracket-title text-red-400">Lower Semi (Bo5)</h3>
-                <div id="lb-r3"></div>
-            </div>
-
-            <div class="flex flex-col gap-8 justify-center">
-                <h3 class="bracket-title text-red-400">Lower Final (Bo5)</h3>
-                <div id="lb-final"></div>
+                <div class="flex gap-8 md:gap-12">
+                    <div class="flex flex-col gap-6">
+                        <h3 class="bracket-title text-red-400">Lower R1</h3>
+                        <div id="lb-r1" class="space-y-6"></div>
+                    </div>
+                    <div class="flex flex-col gap-6">
+                        <h3 class="bracket-title text-red-400">Lower R2</h3>
+                        <div id="lb-r2" class="space-y-6"></div>
+                    </div>
+                    <div class="flex flex-col gap-6 justify-center">
+                        <h3 class="bracket-title text-red-400">L. Semi</h3>
+                        <div id="lb-r3"></div>
+                    </div>
+                    <div class="flex flex-col gap-6 justify-center">
+                        <h3 class="bracket-title text-red-400">L. Final</h3>
+                        <div id="lb-final"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="mt-12 text-center text-slate-500 text-sm italic">
-        LEC Versus 2026 - Predictions are based on official head-to-head rules and Fearless Draft format.
+    <footer class="mt-8 mb-4 text-center text-slate-500 text-[10px] md:text-xs italic px-4">
+        LEC Versus 2026 - Optimized for all devices.
     </footer>
 
     <script src="script.js"></script>

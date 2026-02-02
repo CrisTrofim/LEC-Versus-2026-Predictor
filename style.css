@@ -1,11 +1,25 @@
-/* --- CONFIGURATION GÉNÉRALE --- */
-::-webkit-scrollbar { width: 8px; }
+/* --- CONFIGURATION GÉNÉRALE & SCROLLBAR --- */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Désactive le flash bleu sur mobile */
+}
+
+::-webkit-scrollbar { 
+    width: 6px; 
+    height: 6px; 
+}
 ::-webkit-scrollbar-track { background: #0f172a; }
-::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb { 
+    background: #334155; 
+    border-radius: 10px; 
+}
+::-webkit-scrollbar-thumb:hover { background: #475569; }
 
 body {
     font-family: system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
+    line-height: 1.5;
+    touch-action: manipulation; /* Optimise le délai de clic sur mobile */
 }
 
 /* --- CLASSEMENT (STANDINGS) --- */
@@ -21,39 +35,44 @@ body {
     margin-bottom: 4px;
 }
 
-/* --- MATCHS DE SAISON RÉGULIÈRE --- */
-.predict-btn {
-    transition: all 0.2s ease;
-}
-
-/* --- ARBRE DES PLAYOFFS --- */
+/* --- ARBRE DES PLAYOFFS (BRACKET) --- */
 .bracket-title {
     text-align: center;
     font-weight: 800;
     text-transform: uppercase;
     color: #94a3b8;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
 }
 
+@media (min-width: 768px) {
+    .bracket-title { font-size: 0.75rem; }
+}
+
+/* Cartes de Match */
 .match-card {
     background: #1e293b;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
-    width: 200px;
+    width: 160px; /* Taille réduite pour mobile */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
     border: 1px solid #334155;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+@media (min-width: 768px) {
+    .match-card { width: 200px; border-radius: 12px; }
 }
 
 .match-card:hover {
+    border-color: #4b5563;
     transform: translateY(-2px);
-    border-color: #475569;
 }
 
 .match-team {
-    padding: 12px 15px;
-    font-size: 0.85rem;
+    padding: 10px 12px;
+    font-size: 0.75rem;
     font-weight: 700;
     border-bottom: 1px solid #334155;
     transition: all 0.2s ease;
@@ -62,34 +81,77 @@ body {
     text-overflow: ellipsis;
 }
 
+@media (min-width: 768px) {
+    .match-team { padding: 12px 15px; font-size: 0.85rem; }
+}
+
 .match-team:last-child { 
     border-bottom: none; 
 }
 
-/* Effet au survol pour montrer que c'est cliquable */
-.match-team:hover:not(.bg-blue-600) {
-    background-color: rgba(30, 41, 59, 0.8);
-    padding-left: 20px;
-    color: #60a5fa;
-}
-
-/* --- GRANDE FINALE --- */
-.final-slot {
-    padding: 3rem 2rem;
-    border: 4px double #eab308;
-    background: radial-gradient(circle at center, rgba(234, 179, 8, 0.15) 0%, transparent 100%);
-    border-radius: 2rem;
-    text-align: center;
-    min-width: 250px;
-    box-shadow: 0 0 30px rgba(234, 179, 8, 0.1);
-}
-
-/* Animation pour le gagnant sélectionné */
+/* État sélectionné (Vainqueur) */
 .bg-blue-600 {
     background-color: #2563eb !important;
     color: white !important;
 }
 
-input[type=number]::-webkit-inner-spin-button { opacity: 0; }
-input:focus { color: #60a5fa; }
-.match-card { min-height: 82px; } /* Pour garder une taille fixe */
+/* Inputs de Score */
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    width: 35px;
+    background: #0f172a;
+    color: white;
+    font-size: 14px; /* Empêche le zoom auto sur iOS */
+    border: none;
+    outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input:focus {
+    background: #1e293b !important;
+    color: #fbbf24 !important;
+}
+
+/* --- GRANDE FINALE (CHAMPION) --- */
+.final-slot {
+    padding: 1.5rem 1rem;
+    border: 2px double #eab308;
+    background: radial-gradient(circle at center, rgba(234, 179, 8, 0.15) 0%, transparent 100%);
+    border-radius: 1.5rem;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: 0 0 30px rgba(234, 179, 8, 0.1);
+}
+
+@media (min-width: 768px) {
+    .final-slot {
+        padding: 3rem 2rem;
+        min-width: 250px;
+        border-width: 4px;
+        border-radius: 2rem;
+    }
+}
+
+/* --- UTILITAIRES DE DÉFILEMENT --- */
+.touch-pan-x {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Animation subtile pour le nom du gagnant final */
+#winner-name {
+    text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
