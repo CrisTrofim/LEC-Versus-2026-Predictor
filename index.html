@@ -28,12 +28,39 @@
         </section>
 
         <section class="lg:col-span-2 bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-700 shadow-xl">
-            <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-blue-500">
-                <span class="w-1.5 h-5 bg-blue-500 rounded"></span> Week 4 Matches
-            </h2>
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg md:text-xl font-bold flex items-center gap-2 text-blue-500">
+                    <span class="w-1.5 h-5 bg-blue-500 rounded"></span> Week 4 Matches
+                </h2>
+                <button onclick="clearAllPicks()"
+                    class="text-[10px] md:text-xs bg-slate-700 hover:bg-red-600 text-slate-300 hover:text-white font-bold px-3 py-1.5 rounded-lg transition-colors">Clear
+                    All Picks</button>
+            </div>
             <div id="matches-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
         </section>
     </div>
+
+    <section class="bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-700 shadow-xl mb-8">
+        <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2 text-purple-400">
+            <span class="w-1.5 h-5 bg-purple-500 rounded"></span> Elimination Scenario Finder
+        </h2>
+        <p class="text-xs text-slate-400 mb-4">Select a team to see top 4 chances, elimination scenarios, and which
+            matches matter most. Already-picked results are locked in.</p>
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+            <select id="scenario-team-select"
+                class="bg-slate-900 border border-slate-600 text-slate-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500">
+                <option value="">-- Select a team --</option>
+            </select>
+            <button id="scenario-analyze-btn"
+                class="bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold px-5 py-2 rounded-lg transition-colors">
+                Analyze
+            </button>
+        </div>
+        <div id="scenario-summary" class="hidden mb-3"></div>
+        <div id="scenario-key-matches" class="hidden mb-4"></div>
+        <div id="scenario-results" class="hidden scenario-results-container"></div>
+        <p class="text-[10px] text-slate-600 text-center mt-4 italic">The Chance that baus can pick Sion == 0%</p>
+    </section>
 
     <section class="bg-slate-800/40 p-2 md:p-8 rounded-3xl border border-slate-700 shadow-2xl mt-4">
         <h2 class="text-2xl md:text-3xl font-black text-center mb-8 italic tracking-tighter">PLAYOFF BRACKET</h2>

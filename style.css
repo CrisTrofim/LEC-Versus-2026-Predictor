@@ -1,37 +1,46 @@
 /* --- CONFIGURATION GÉNÉRALE & SCROLLBAR --- */
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent; /* Désactive le flash bleu sur mobile */
+    -webkit-tap-highlight-color: transparent;
+    /* Désactive le flash bleu sur mobile */
 }
 
-::-webkit-scrollbar { 
-    width: 6px; 
-    height: 6px; 
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
-::-webkit-scrollbar-track { background: #0f172a; }
-::-webkit-scrollbar-thumb { 
-    background: #334155; 
-    border-radius: 10px; 
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
 }
-::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
 
 body {
     font-family: system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     line-height: 1.5;
-    touch-action: manipulation; /* Optimise le délai de clic sur mobile */
+    touch-action: manipulation;
+    /* Optimise le délai de clic sur mobile */
 }
 
 /* --- CLASSEMENT (STANDINGS) --- */
-.qualified-row { 
-    border-left: 4px solid #22c55e; 
-    background: rgba(34, 197, 94, 0.05); 
+.qualified-row {
+    border-left: 4px solid #22c55e;
+    background: rgba(34, 197, 94, 0.05);
     margin-bottom: 4px;
 }
 
-.eliminated-row { 
-    border-left: 4px solid #ef4444; 
-    background: rgba(239, 68, 68, 0.05); 
+.eliminated-row {
+    border-left: 4px solid #ef4444;
+    background: rgba(239, 68, 68, 0.05);
     margin-bottom: 4px;
 }
 
@@ -47,7 +56,9 @@ body {
 }
 
 @media (min-width: 768px) {
-    .bracket-title { font-size: 0.75rem; }
+    .bracket-title {
+        font-size: 0.75rem;
+    }
 }
 
 /* Cartes de Match */
@@ -55,14 +66,18 @@ body {
     background: #1e293b;
     border-radius: 8px;
     overflow: hidden;
-    width: 160px; /* Taille réduite pour mobile */
+    width: 160px;
+    /* Taille réduite pour mobile */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
     border: 1px solid #334155;
     transition: all 0.2s ease;
 }
 
 @media (min-width: 768px) {
-    .match-card { width: 200px; border-radius: 12px; }
+    .match-card {
+        width: 200px;
+        border-radius: 12px;
+    }
 }
 
 .match-card:hover {
@@ -82,11 +97,14 @@ body {
 }
 
 @media (min-width: 768px) {
-    .match-team { padding: 12px 15px; font-size: 0.85rem; }
+    .match-team {
+        padding: 12px 15px;
+        font-size: 0.85rem;
+    }
 }
 
-.match-team:last-child { 
-    border-bottom: none; 
+.match-team:last-child {
+    border-bottom: none;
 }
 
 /* État sélectionné (Vainqueur) */
@@ -102,7 +120,8 @@ input[type=number] {
     width: 35px;
     background: #0f172a;
     color: white;
-    font-size: 14px; /* Empêche le zoom auto sur iOS */
+    font-size: 14px;
+    /* Empêche le zoom auto sur iOS */
     border: none;
     outline: none;
 }
@@ -145,9 +164,9 @@ input:focus {
     overflow-x: auto;
     overflow-y: hidden;
     /* Force le scroll fluide sur iOS */
-    -webkit-overflow-scrolling: touch; 
+    -webkit-overflow-scrolling: touch;
     /* Empêche le rebond Safari qui bloque parfois le scroll horizontal */
-    overscroll-behavior-x: contain; 
+    overscroll-behavior-x: contain;
 }
 
 /* On s'assure que le contenu intérieur ne bloque pas le geste */
@@ -157,14 +176,17 @@ input:focus {
 }
 
 /* FIX CRITIQUE : Empêche les clics sur les cartes de bloquer le début du scroll */
-.match-card, .match-team, input {
-    touch-action: pan-x pan-y; 
+.match-card,
+.match-team,
+input {
+    touch-action: pan-x pan-y;
 }
 
 /* Style de la barre de défilement pour qu'elle soit visible et incite au scroll */
 .overflow-x-auto::-webkit-scrollbar {
     height: 8px;
 }
+
 .overflow-x-auto::-webkit-scrollbar-thumb {
     background: #475569;
     border-radius: 10px;
@@ -177,7 +199,242 @@ input:focus {
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.8; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* --- SCENARIO ANALYSIS --- */
+.scenario-results-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    background: #0f172a;
+}
+
+.scenario-summary-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.scenario-safe {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #86efac;
+}
+
+.scenario-doomed {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
+.scenario-warning {
+    background: rgba(234, 179, 8, 0.1);
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    color: #fde68a;
+}
+
+.scenario-list {
+    padding: 4px;
+}
+
+.scenario-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #1e293b;
+    font-size: 0.75rem;
+    color: #cbd5e1;
+}
+
+.scenario-row:last-child {
+    border-bottom: none;
+}
+
+.scenario-row-even {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+.scenario-rank-badge {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    font-weight: 800;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    min-width: 36px;
+    margin-top: 2px;
+}
+
+.scenario-matches-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+}
+
+.scenario-match {
+    white-space: nowrap;
+    font-size: 0.7rem;
+    color: #94a3b8;
+}
+
+.scenario-vs {
+    color: #475569;
+    font-style: italic;
+    font-size: 0.6rem;
+    margin: 0 2px;
+}
+
+.scenario-team-win {
+    color: #4ade80;
+    font-weight: 700;
+}
+
+.scenario-team-loss {
+    color: #f87171;
+    font-weight: 700;
+}
+
+/* Top 4 scenario boxes */
+.scenario-top4 {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #d8b4fe;
+}
+
+.scenario-no-top4 {
+    background: rgba(100, 116, 139, 0.1);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+    color: #94a3b8;
+}
+
+.scenario-top4-chance {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
+}
+
+/* Key Matches */
+.key-matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 8px;
+}
+
+.key-match-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 10px 14px;
+    transition: border-color 0.2s;
+}
+
+.key-match-critical {
+    border-left: 4px solid #f87171;
+}
+
+.key-match-important {
+    border-left: 4px solid #fbbf24;
+}
+
+.key-match-minor {
+    border-left: 4px solid #475569;
+}
+
+.key-match-header {
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: #e2e8f0;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.key-match-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.key-match-stat {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: #94a3b8;
+}
+
+.key-match-label {
+    color: #cbd5e1;
+    font-weight: 600;
+    min-width: 100px;
+}
+
+.key-match-val {
+    font-size: 0.7rem;
+}
+
+.key-match-val strong {
+    color: #e2e8f0;
+}
+
+.key-match-note {
+    font-size: 0.65rem;
+    color: #475569;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+/* Scenario dropdown styling */
+#scenario-team-select {
+    transition: border-color 0.2s;
+}
+
+#scenario-team-select:focus {
+    border-color: #a855f7;
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+@media (max-width: 640px) {
+    .scenario-match {
+        font-size: 0.6rem;
+    }
+
+    .scenario-row {
+        padding: 6px 8px;
+        font-size: 0.65rem;
+    }
+
+    .scenario-summary-box {
+        font-size: 0.75rem;
+    }
+
+    .key-matches-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .key-match-stat {
+        font-size: 0.65rem;
+    }
 }
