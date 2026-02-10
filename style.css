@@ -181,19 +181,3 @@ input:focus {
     50% { opacity: 0.8; }
     100% { opacity: 1; }
 }
-
-.match-team img {
-    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
-}
-
-.qualified-row img, .eliminated-row img {
-    filter: drop-shadow(0 0 1px rgba(255,255,255,0.2));
-}
-
-/* Optionnel : Ajuster la taille du conteneur Grand Final pour le logo */
-#winner-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
